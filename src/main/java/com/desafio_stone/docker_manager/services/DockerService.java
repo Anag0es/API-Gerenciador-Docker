@@ -23,6 +23,10 @@ public class DockerService {
         return dockerClient.listImagesCmd().exec();
     }
 
+    public List<Image> filterImages(String imageName) {
+        return dockerClient.listImagesCmd().withImageNameFilter(imageName).exec();
+    }
+
     public void startContainer(String containerId) {
         dockerClient.startContainerCmd(containerId).exec();
     }

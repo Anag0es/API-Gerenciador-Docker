@@ -2,7 +2,6 @@ package com.desafio_stone.docker_manager.controllers;
 
 import com.desafio_stone.docker_manager.services.DockerService;
 import com.github.dockerjava.api.model.Container;
-import com.github.dockerjava.api.model.Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +15,7 @@ public class ContainersController {
     private DockerService containersService;
 
     @GetMapping("")
-    public List<Container> filterImages(@RequestParam(required = false, defaultValue = "true") boolean showAll) {
+    public List<Container> listContainer(@RequestParam(required = false, defaultValue = "true") boolean showAll) {
         return containersService.listContainers(showAll);
     }
 

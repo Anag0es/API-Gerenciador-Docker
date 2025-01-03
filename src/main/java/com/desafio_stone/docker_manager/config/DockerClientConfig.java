@@ -23,11 +23,19 @@ public class DockerClientConfig {
         DefaultDockerClientConfig.Builder dockerClientConfigBuilder = DefaultDockerClientConfig
                 .createDefaultConfigBuilder();
 
-        if(this.dockerSocketPath != null && this.dockerSocketPath.startsWith("unix://")) {
-            dockerClientConfigBuilder.withDockerHost(dockerSocketPath)
+        if (this.dockerSocketPath != null && this.dockerSocketPath.startsWith("unix://")) {
+            dockerClientConfigBuilder
+                    .withDockerHost(dockerSocketPath)
                     .withApiVersion(RemoteApiVersion.VERSION_1_24)
                     .withDockerTlsVerify(false);
-        }
+
+        } else if (this.dockerSocketPath != null && this.dockerSocketPath.startsWith("tcp://")) {
+            dockerClientConfigBuilder
+                    .withDockerHost(this.dockerSocketPath)
+                    .withApiVersion(RemoteApiVersion.VERSION_1_24)
+                    .withDockerTlsVerify(false);
+            }
+
 
         DefaultDockerClientConfig dockerClientConfig = dockerClientConfigBuilder
                 .build();
